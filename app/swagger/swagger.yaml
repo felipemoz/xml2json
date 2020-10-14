@@ -1,0 +1,57 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple crud on MSSQL"
+  version: "1.0.0"
+  title: "Simple CRUD"
+  contact:
+    email: "fmoz@microsoft.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/felipemoz/simple-crud/1.0.0"
+tags:
+- name: "users"
+  description: "simple crud operation"
+schemes:
+- "https"
+paths:
+  /add:
+    post:
+      tags:
+      - "user"
+      summary: "insert new user"
+      description: "add new user to the system"
+      operationId: "add_user"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_name"
+        description: "User Name"
+        required: false
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: "user added"
+        "400":
+          description: "invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+definitions:
+  User:
+    type: "object"
+    properties:
+      user_name:
+        type: "string"
+      user_email:
+        type: "string"
+      pwd:
+        type: "string"
+    example:
+      user_email: "user_email"
+      user_name: "user_name"
+      pwd: "pwd"
