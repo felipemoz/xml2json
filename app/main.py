@@ -167,7 +167,7 @@ def delete_user(id):
 	cursor = conn.cursor()
 
 	try:
-		statement("'DELETE FROM tbl_user WHERE user_id=%s" % (id))
+		statement=("'DELETE FROM tbl_user WHERE user_id=%s" % (id))
 		conn.commit()
 		
 		return jsonify(message='user updated', user_id=id)
