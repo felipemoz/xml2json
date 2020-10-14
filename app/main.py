@@ -110,23 +110,32 @@ def users():
 		cursor.close() 
 		conn.close()
 
-@app.route('/user/', methods=['GET'])
-def user(id):
+@app.route('/user/<user_id>', methods=['GET'])
+def user(user_id):
 	conn = pyodbc.connect(connection)
 	cursor = conn.cursor()
 
 	try:
 		
-		statement= ("SELECT * FROM tbl_user where user_id = %s" % id)
+		statement= ("SELECT * FROM tbl_user where user_id = '%s'" % user_id)
 		cursor.execute(statement)
 		
-		data = cursor.fetchone()
-		_type= type(data)
+		colnames = ['user_id', 'user_name', 'user_email', 'user_password']
+		data = {}
 
+		for row in cursor.fetchall():
+			colindex = 0
+			for col in colnames:
+				if not col in data:
+					data[col] = []
+				data[col].append(row[colindex])
+				colindex += 1
+		_type= type(data)
+		
 		return (jsonify(data))
 
 	except Exception as e:
-		return (jsonify(error='fail to list user', id=id, exc=e, statement=statement, type=_type))
+		return (jsonify(error='fail to list user', id=user_id, exc=e, statement=statement, type=_type))
 	
 	finally:
 		
@@ -148,7 +157,7 @@ def update_user():
 	cursor = conn.cursor()
 
 	try:
-		statement= ("'UPDATE tbl_user SET user_name=%s, user_email=%s, user_password=%s WHERE user_id=%s'" % (_name, _email, _password, _user_id))
+		statement= ("UPDATE tbl_user SET user_name='%s', user_email='%s', user_password='%s' WHERE user_id='%s'" % (_name, _email, _hashed_password, _user_id))
 		cursor.execute(statement)
 		conn.commit()			
 	
@@ -161,19 +170,19 @@ def update_user():
 		cursor.close() 
 		conn.close()
 		
-@app.route('/delete/', methods=['POST'])
-def delete_user(id):
+@app.route('/delete/<user_id>', methods=['DELETE'])
+def delete_user(user_id):
 	conn = pyodbc.connect(connection)
 	cursor = conn.cursor()
 
 	try:
-		statement=("'DELETE FROM tbl_user WHERE user_id=%s" % (id))
+		statement=("DELETE FROM tbl_user WHERE user_id='%s'" % (user_id))
 		conn.commit()
 		
-		return jsonify(message='user updated', user_id=id)
+		return jsonify(message='user deleted', user_id=user_id)
 	
 	except Exception as e:
-		return (jsonify(error='fail to update user', id=id, exc=e, statement=statement))
+		return (jsonify(error='fail to update user', id=user_id, exc=e, statement=statement))
 
 	finally:
 		cursor.close() 

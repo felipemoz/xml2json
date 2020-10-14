@@ -1,0 +1,1 @@
+curl -d '{"user_id":"0af37b2a-4922-49e7-9d91-50f8e29ea88a", "name":"Felipe Atualizado", "email": "moz.felipe@gmail.com", "pwd":"$(RANDOM)"}' -H "Content-Type: application/json" -X POST http://127.0.0.1/update
