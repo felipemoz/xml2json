@@ -1,6 +1,7 @@
 import json
 import xmltodict
 from flask import Flask, jsonify, make_response, request
+import sender from sender
 
 app = Flask(__name__)
 
@@ -15,12 +16,27 @@ def not_found(error=None):
     resp.status_code = 404
     return (resp)
 
+
 @app.route('/xml2json', methods=['POST'])
-def delete_user(xmlString):
+def simple_convert(xmlString):
 	
 	try:
-		converted = json.dumps(xmltodict.parse(xmlString), indent=4)
-		return (jsonify(converted))
+		content = json.dumps(xmltodict.parse(xmlString), indent=4)
+		return (jsonify(content))
+
+	except Exception as e:
+		return (jsonify(error='parser content', exc=e))
+
+
+@app.route('/xml2EventHub', methods=['POST'])
+def xnl_2_event_hub(xmlString):
+	
+	try:
+		content = json.dumps(xmltodict.parse(xmlString), indent=4)
+		
+		sender(content=content)
+
+		return (jsonify(message='ok'))
 	except Exception as e:
 		return (jsonify(error='parser content', exc=e))
 
