@@ -6,4 +6,4 @@ test:
 	./tests/insert.sh
 	
 connect:
-	python connect.py
+	python ./tests/connect.py
