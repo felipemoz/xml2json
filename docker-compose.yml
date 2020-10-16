@@ -1,7 +1,7 @@
 version: '3.4'
 services:
-  app-1:
-    container_name: app_1
+  xml2json:
+    container_name: xml2json
     build:
       context: .
       dockerfile: Dockerfile

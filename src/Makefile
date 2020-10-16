@@ -1,2 +1,2 @@
 run:
-	gunicorn -w 4 main:app
+	gunicorn main:app

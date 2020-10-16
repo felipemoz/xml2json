@@ -1,1 +1,0 @@
-curl -X DELETE http://127.0.0.1/delete/7b99cab1-af21-4bbe-83dd-5999b7041165

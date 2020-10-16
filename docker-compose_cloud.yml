@@ -1,0 +1,6 @@
+version: '3.4'
+services:
+  app-1:
+    container_name: app_1
+    volumes:
+      - ./src:/app/

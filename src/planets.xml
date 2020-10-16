@@ -1,0 +1,26 @@
+<planets>
+    <planet>
+        <name>
+            Earth
+        </name>
+        <radius>
+            6,371km
+        </radius>
+    </planet>
+    <planet>
+        <name>
+            Jupiter
+        </name>
+        <radius>
+            69,911km
+        </radius>
+    </planet>
+    <planet>
+        <name>
+            Mars
+        </name>
+        <radius>
+            3,390km
+        </radius>
+    </planet>
+</planets>
