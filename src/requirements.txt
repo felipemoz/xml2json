@@ -7,3 +7,4 @@ uuid==1.30
 Werkzeug==1.0.1
 gunicorn
 xmltodict
+azure-eventhub==5.2.0
