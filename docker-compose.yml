@@ -6,9 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./app:/app/
+      - ./src:/app/
     ports:
-      - 80:80
+      - 8000:8000
     env_file:
       - .env
     networks:

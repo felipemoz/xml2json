@@ -189,4 +189,4 @@ def delete_user(user_id):
 		conn.close()
 
 if __name__ == '__main__':
-    app.run(port=app_port, debug=app_debug)
+    app.run(debug=app_debug)
